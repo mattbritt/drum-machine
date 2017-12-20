@@ -22,7 +22,10 @@ export class ButtonContainer extends React.Component{
     {
         // if power is on, do keypress animation and sound
         if(this.props.powerOn)
-        {           
+        {         
+            // play sound
+           // this.props.buttonObj.kit1.sound.play();
+            
             var background = {...this.state.buttonStyle};
             background.background = '#ffa500';
             background.boxShadow = '';
@@ -33,7 +36,7 @@ export class ButtonContainer extends React.Component{
 
             setTimeout(function() {
                 this.setState({buttonStyle: styles.Button});
-            }.bind(this), 80);
+            }.bind(this), 10);
         }
     }
 
@@ -44,8 +47,10 @@ export class ButtonContainer extends React.Component{
 
 
     componentWillReceiveProps(nextProps){
-        console.log(this.props.buttonPress === this.props.letter)
-        if(nextProps.buttonPress === this.props.letter){
+    
+        if(nextProps.buttonPress === this.props.buttonObj.letter  
+        || nextProps.buttonPress === this.props.buttonObj.number)
+        {
           
             this.handleClick();
         }
@@ -58,7 +63,7 @@ export class ButtonContainer extends React.Component{
             <Button 
             buttonStyle={this.state.buttonStyle}
             handleClick={this.handleClick}
-            letter={this.props.letter}/>
+            letter={this.props.buttonObj.letter}/>
             
         );
     }

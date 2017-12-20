@@ -4,8 +4,34 @@ import {ButtonContainer} from '../containers/ButtonContainer';
 
 import {styles} from '../helpers/styles';
 
+
+// sounds objects
+let buttonObjs = [
+    { 
+        letter: 'Q',
+        number: '7',
+        kit1:{
+            name:'Heater 1',
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Heater-1.mp3')
+             },
+        kit2:{
+            name:'Chord 1',
+            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'
+            }
+
+    }
+];
+
+
 export class DrumMachine extends React.Component{
   
+
+
+
+
+
+
+
 
 
 
@@ -14,6 +40,8 @@ constructor(props)
     super(props);
     
     this.state = {
+        powerOn: true,
+        bank: 1,
         buttonPress: ''
     };
 
@@ -28,28 +56,54 @@ componentWillUnmount(){
 }
 
 handleKeyPress(event){
-    this.setState({buttonPress: event.key.toUpperCase()});
+
+    let thisKey = event.key.toUpperCase();
+
+    // play sound
+    for(let i = 0; i < buttonObjs.length; i++)
+    {
+        if(buttonObjs[i].letter === thisKey
+        || buttonObjs[i].number === thisKey)
+        {
+            buttonObjs[i].kit1.sound.play();
+        }
+    }
+
+
+
+    this.setState({buttonPress: thisKey});
 }
 
   
   
     render(){
+
+        let buttons = {};
+
+        for(let i=0; i<buttonObjs.length; i++)
+        {
+            buttons += 
+            <ButtonContainer
+                buttonObj={buttonObjs[i]}
+                powerOn={this.state.powerOn}
+                bank={this.state.bank}
+                buttonPress={this.state.buttonPress} />
+
+        }
+console.log(buttons);
+
         return (
             <div id='drum-machine'
                 style={styles.DrumMachine}>
-
-            <h1>Hi HO!</h1>
+               
+               {buttonObjs.map(buttonObj => 
             <ButtonContainer 
-                letter='B'
-                powerOn={true}
-                buttonPress={this.state.buttonPress}/>
-           
+                buttonObj={buttonObj} 
+                powerOn={this.state.powerOn}
+                bank={this.state.bank}
+                buttonPress={this.state.buttonPress}/>)}
+            </div>
 
-<ButtonContainer 
-letter='P'
-powerOn={true}
-buttonPress={this.state.buttonPress}/>
-</div>
 
 
         );
