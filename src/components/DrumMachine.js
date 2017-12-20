@@ -13,6 +13,10 @@ constructor(props)
 {
     super(props);
     
+    this.state = {
+        buttonPress: ''
+    };
+
 }
 
 componentDidMount(){
@@ -23,6 +27,9 @@ componentWillUnmount(){
     window.removeEventListener("keypress", this.handleKeyPress.bind(this));
 }
 
+handleKeyPress(event){
+    this.setState({buttonPress: event.key.toUpperCase()});
+}
 
   
   
@@ -34,8 +41,17 @@ componentWillUnmount(){
             <h1>Hi HO!</h1>
             <ButtonContainer 
                 letter='B'
-                powerOn={true}/>
-            </div>
+                powerOn={true}
+                buttonPress={this.state.buttonPress}/>
+           
+
+<ButtonContainer 
+letter='P'
+powerOn={true}
+buttonPress={this.state.buttonPress}/>
+</div>
+
+
         );
     }
 }

@@ -33,7 +33,7 @@ export class ButtonContainer extends React.Component{
 
             setTimeout(function() {
                 this.setState({buttonStyle: styles.Button});
-            }.bind(this), 50);
+            }.bind(this), 80);
         }
     }
 
@@ -42,13 +42,24 @@ export class ButtonContainer extends React.Component{
         this.setState({buttonStyle: styles.Button});
     }
 
+
+    componentWillReceiveProps(nextProps){
+        console.log(this.props.buttonPress === this.props.letter)
+        if(nextProps.buttonPress === this.props.letter){
+          
+            this.handleClick();
+        }
+
+    }
     
     render(){
+
         return (
             <Button 
             buttonStyle={this.state.buttonStyle}
             handleClick={this.handleClick}
             letter={this.props.letter}/>
+            
         );
     }
 }
