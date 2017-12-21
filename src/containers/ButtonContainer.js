@@ -20,11 +20,16 @@ export class ButtonContainer extends React.Component{
 
     handleClick()
     {
+        this.props.playSound(this.props.buttonObj.letter);
+    }
+
+    buttonPress(){
+
         // if power is on, do keypress animation and sound
         if(this.props.powerOn)
         {         
             // play sound
-           // this.props.buttonObj.kit1.sound.play();
+          
             
             var background = {...this.state.buttonStyle};
             background.background = '#ffa500';
@@ -52,7 +57,7 @@ export class ButtonContainer extends React.Component{
         || nextProps.buttonPress === this.props.buttonObj.number)
         {
           
-            this.handleClick();
+            this.buttonPress();
         }
 
     }
@@ -63,7 +68,8 @@ export class ButtonContainer extends React.Component{
             <Button 
             buttonStyle={this.state.buttonStyle}
             handleClick={this.handleClick}
-            letter={this.props.buttonObj.letter}/>
+            letter={this.props.buttonObj.letter}
+            />
             
         );
     }

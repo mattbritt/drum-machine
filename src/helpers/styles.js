@@ -23,6 +23,8 @@ let styles = {
             justifyContent:'center',
             alignItems:'center',
 
+            flexWrap:'wrap',
+           
             background:'#b3b3b3',
 
             borderStyle:'solid',
@@ -30,12 +32,28 @@ let styles = {
             borderColor:'#ffa500'
         },
 
-        Button: {
+        pad: {
+          
+            width:'100%',
+            
             display:'flex',
-            width:150,
-            height:125,
+            flexWrap:'wrap',
             justifyContent:'center',
             alignItems:'center',
+        
+
+            margin:0,
+            padding:0
+
+        },
+
+        Button: {
+            display:'flex',
+            width:'25%',
+            height:100,
+            justifyContent:'center',
+            alignItems:'center',
+            flexShrink:'1',
 
             fontWeight:'900',
             fontSize:'1.5em',
@@ -49,7 +67,25 @@ let styles = {
             marginBottom:10,
 
             background:'#808080'
+        },
+
+        logoDiv: {
+            margin:0,
+            padding:0,
+            width:'100%',
+            display:'flex',
+            justifyContent:'flex-end'
+        },
+
+        logo: {
+         
+            margin:3,
+            padding:3,
+            fontStyle:'italic'
+            
         }
+
+
 
 };
 
