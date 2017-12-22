@@ -4,6 +4,7 @@ import React from 'react';
 
 import {ButtonContainer} from '../containers/ButtonContainer';
 import {Switch} from '../components/Switch';
+import {Display} from '../components/Display';
 
 import {styles} from '../helpers/styles';
 
@@ -136,7 +137,8 @@ constructor(props)
     this.state = {
         power: true,
         bank: false,
-        buttonPress: ''
+        buttonPress: '',
+        displayText: ''
     };
 
     this.playSound = this.playSound.bind(this);
@@ -175,6 +177,7 @@ playSound(letter){
     }
     
     let aud;
+    let text;
 
     for(let i = 0; i < buttonObjs.length; i++)
     {
@@ -185,10 +188,12 @@ playSound(letter){
             if(!this.state.bank)
             {
                 aud = buttonObjs[i].kit1.sound.cloneNode();
+                text = buttonObjs[i].kit1.name;
             }
             else
             {
                 aud = buttonObjs[i].kit2.sound.cloneNode();
+                text = buttonObjs[i].kit2.name;
             }
             break;
         }
@@ -205,7 +210,8 @@ playSound(letter){
     aud.play();
 
     // update state to trigger 'animation'
-    this.setState({buttonPress: letter});
+    this.setState({buttonPress: letter,
+                    displayText: text});
 }
 
 togglePower()
@@ -247,7 +253,7 @@ toggleBank()
                             handleClick={this.togglePower}
                             name={'POWER'}/>
 
-
+                        <Display text={this.state.displayText} />
                         <Switch 
                             set={this.state.bank}
                             handleClick={this.toggleBank}

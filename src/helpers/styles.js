@@ -88,6 +88,11 @@ let styles = {
         },
 
         controls: {
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center',
+
               width:'45%',
               minWidth:'340px'
               //  height:500
@@ -128,6 +133,18 @@ let styles = {
             width:'45%',
             height:'100%',
             alignSelf:'flex-end'
+        },
+
+        Display: {
+            alignSelf:'center',
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            height:60,
+            width:'75%',
+            background:'#808080',
+            fontSize:30,
+            fontWeight:900
         }
 
 
