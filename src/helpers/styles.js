@@ -34,8 +34,8 @@ let styles = {
 
         pad: {
           
-            width:'100%',
-            
+            width:'45%',
+            minWidth:'340px',
             display:'flex',
             flexWrap:'wrap',
             justifyContent:'center',
@@ -81,8 +81,53 @@ let styles = {
          
             margin:3,
             padding:3,
-            fontStyle:'italic'
+            fontFamily:'Impact, Charcoal, sans-serif',
+            fontStyle:'italic',
+            fontWeight:'bolder'
             
+        },
+
+        controls: {
+              width:'45%',
+              minWidth:'340px'
+              //  height:500
+        },
+
+        switchDiv: {
+            display:'flex',
+            flexDirection:'column',
+            justifyContent:'center',
+            alignItems:'center',
+            padding:0,
+            margin:0
+        },
+
+        switchH3: {
+            padding:0,
+            margin:0,
+            justifyText:'center',
+            fontWeight:'900'
+        },
+
+
+        switchBox: {
+            display:'flex',
+            alignItems:'center',
+            background:'black',
+            width:'75px',
+            height:'25px',
+            padding:5,
+            margin:0
+
+        },
+
+        switch: {
+            display:'flex',
+            background:'blue',
+            boxSizing:'border-box',
+            width:'45%',
+            height:'100%',
+            alignSelf:'flex-end'
         }
 
 

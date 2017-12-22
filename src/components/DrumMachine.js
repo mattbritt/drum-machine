@@ -3,6 +3,7 @@
 import React from 'react';
 
 import {ButtonContainer} from '../containers/ButtonContainer';
+import {Switch} from '../components/Switch';
 
 import {styles} from '../helpers/styles';
 
@@ -18,7 +19,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Chord 1',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Chord_1.mp3')
             }
     },
     { 
@@ -30,7 +31,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Chord 2',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Chord_2.mp3')
             }
     },
     { 
@@ -42,7 +43,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Chord 3',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Chord_3.mp3')
             }
     },
     { 
@@ -54,7 +55,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Shaker',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Give_us_a_light.mp3')
             }
     },
     { 
@@ -66,7 +67,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Open HH',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Dry_Ohh.mp3')
             }
     },
     { 
@@ -78,7 +79,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Closed HH',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Bld_H1.mp3')
             }
     },
     { 
@@ -90,7 +91,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Punchy Kick',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/punchy_kick_1.mp3')
             }
     },
     { 
@@ -102,7 +103,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Side Stick',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/side_stick_1.mp3')
             }
     },
     { 
@@ -114,7 +115,7 @@ let buttonObjs = [
              },
         kit2:{
             name:'Snare',
-            soundUrl:'https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3'
+            sound:new Audio('https://s3.amazonaws.com/freecodecamp/drums/Brk_Snr.mp3')
             }
     }
 
@@ -133,12 +134,14 @@ constructor(props)
     super(props);
     
     this.state = {
-        powerOn: true,
-        bank: 1,
+        power: true,
+        bank: false,
         buttonPress: ''
     };
 
     this.playSound = this.playSound.bind(this);
+    this.togglePower = this.togglePower.bind(this);
+    this.toggleBank = this.toggleBank.bind(this);
 }
 
 componentDidMount(){
@@ -163,6 +166,14 @@ handleKeyPress(event){
 playSound(letter){
 // find right sound and text for given key press
     // search for letter/number in buttonObjs array    
+    
+    
+    // do nothing if power is off
+    if(!this.state.power)
+    {
+        return;
+    }
+    
     let aud;
 
     for(let i = 0; i < buttonObjs.length; i++)
@@ -171,7 +182,14 @@ playSound(letter){
         if(buttonObjs[i].letter === letter
         || buttonObjs[i].number === letter)
         {
-            aud = buttonObjs[i].kit1.sound.cloneNode();
+            if(!this.state.bank)
+            {
+                aud = buttonObjs[i].kit1.sound.cloneNode();
+            }
+            else
+            {
+                aud = buttonObjs[i].kit2.sound.cloneNode();
+            }
             break;
         }
     }
@@ -190,6 +208,16 @@ playSound(letter){
     this.setState({buttonPress: letter});
 }
 
+togglePower()
+{
+    this.setState({power: !this.state.power});
+}
+
+toggleBank()
+{
+    this.setState({bank: !this.state.bank});
+}
+
  
     render(){
 
@@ -198,8 +226,8 @@ playSound(letter){
                 style={styles.DrumMachine}>
               
               <div style={styles.logoDiv}>
-                <h2 style={styles.logo}><strong>
-                FCC<i className="fa fa-free-code-camp"></i></strong></h2>
+                <h2 style={styles.logo}>
+                FCC<em><i className="fa fa-free-code-camp"></i></em></h2>
               </div>
 
                 <div style={styles.pad}>  
@@ -207,10 +235,25 @@ playSound(letter){
                     <ButtonContainer id={buttonObj.letter}
                         key={buttonObj.letter}
                         buttonObj={buttonObj} 
-                        powerOn={this.state.powerOn}
+                        powerOn={this.state.power}
                         bank={this.state.bank}
                         buttonPress={this.state.buttonPress}
                         playSound={this.playSound}/>)}
+                </div>
+                
+                <div style={styles.controls}>
+                        <Switch 
+                            set={this.state.power}
+                            handleClick={this.togglePower}
+                            name={'POWER'}/>
+
+
+                        <Switch 
+                            set={this.state.bank}
+                            handleClick={this.toggleBank}
+                            name={'BANK'}/>
+                        
+
                 </div>
             </div>
 
