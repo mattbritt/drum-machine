@@ -34,7 +34,12 @@ body {
 
 
 .volumeSlider::-moz-range-thumb{
+  appearance: none;
+  background:blue;
+  width:10px;
+  height:30px;
 
-color:red;
-width:12px;
+  border-style:solid;
+  border-width:1px;
+  border-color:black;
 }

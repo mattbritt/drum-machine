@@ -139,12 +139,14 @@ constructor(props)
         power: true,
         bank: false,
         buttonPress: '',
-        displayText: ''
+        displayText: '',
+        volume:0.5
     };
 
     this.playSound = this.playSound.bind(this);
     this.togglePower = this.togglePower.bind(this);
     this.toggleBank = this.toggleBank.bind(this);
+    this.handleVolume = this.handleVolume.bind(this);
 }
 
 componentDidMount(){
@@ -164,6 +166,10 @@ handleKeyPress(event){
 
 }
 
+handleVolume(event){
+    console.log(event.target.value);
+    this.setState({volume: event.target.value});
+}
 
 
 playSound(letter){
@@ -207,6 +213,8 @@ playSound(letter){
         return;
     }
 
+    // set volume
+    aud.volume = this.state.volume;
     // play sound
     aud.play();
 
@@ -257,7 +265,7 @@ toggleBank()
 
                         <Display text={this.state.displayText} />
                        
-                       <Slider />
+                       <Slider handleVolume={this.handleVolume}/>
                        
                         <Switch 
                             set={this.state.bank}
