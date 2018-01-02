@@ -1,13 +1,10 @@
 import React from 'react';
 
-import {styles} from '../helpers/styles';
+//import {styles} from '../helpers/styles';
 
 
 export class Slider extends React.Component{
    
-   handleChange(e){
-       console.log(e.target.value);
-   }
    
     render()
     {

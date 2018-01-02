@@ -167,7 +167,7 @@ handleKeyPress(event){
 }
 
 handleVolume(event){
-    console.log(event.target.value);
+    
     this.setState({volume: event.target.value});
 }
 
