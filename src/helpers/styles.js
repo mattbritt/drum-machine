@@ -29,12 +29,13 @@ let styles = {
 
             borderStyle:'solid',
             borderWidth:7,
-            borderColor:'#ffa500'
+            borderColor:'#ffa500',
+            paddingBottom:'5%'
         },
 
         pad: {
           
-            width:'45%',
+            width:'55%',
             minWidth:'340px',
             display:'flex',
             flexWrap:'wrap',
@@ -49,7 +50,7 @@ let styles = {
 
         Button: {
             display:'flex',
-            width:'25%',
+            width:'27%',
             height:100,
             justifyContent:'center',
             alignItems:'center',
@@ -104,7 +105,7 @@ let styles = {
             justifyContent:'center',
             alignItems:'center',
             padding:0,
-            margin:0
+            margin:15
         },
 
         switchH3: {
@@ -144,8 +145,24 @@ let styles = {
             width:'75%',
             background:'#808080',
             fontSize:30,
-            fontWeight:900
+            fontWeight:900,
+            margin:25
+        },
+
+        Slider: {
+            
+            track: {webkitAppearance:'none',
+            appearance:'none',
+            background:'#424242',
+            width:300,
+            height:5},
+
+            thumb: {
+                width:250
+            }
         }
+
+
 
 
 

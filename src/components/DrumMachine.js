@@ -5,6 +5,7 @@ import React from 'react';
 import {ButtonContainer} from '../containers/ButtonContainer';
 import {Switch} from '../components/Switch';
 import {Display} from '../components/Display';
+import {Slider} from '../components/Slider';
 
 import {styles} from '../helpers/styles';
 
@@ -216,7 +217,8 @@ playSound(letter){
 
 togglePower()
 {
-    this.setState({power: !this.state.power});
+    this.setState({power: !this.state.power,
+                    displayText: ''});
 }
 
 toggleBank()
@@ -254,6 +256,9 @@ toggleBank()
                             name={'POWER'}/>
 
                         <Display text={this.state.displayText} />
+                       
+                       <Slider />
+                       
                         <Switch 
                             set={this.state.bank}
                             handleClick={this.toggleBank}
